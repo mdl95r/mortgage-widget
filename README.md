@@ -27,4 +27,13 @@ const getDataFromWidget = async () => {
   console.log(...newData);
 }
 
+const transformData = (data) => {
+  return data.map((el) => {
+    return {
+      ...el,
+      info: `${el.bank} ставка: ${el.rate}`
+    }
+  })
+}
+
 ```
