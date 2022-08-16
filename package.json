@@ -1,0 +1,27 @@
+{
+  "name": "ssb",
+  "version": "1.0.0",
+  "description": "Simply-sharing-btns",
+  "source": "src/app/index.js",
+  "main": "dist/main.js",
+  "scripts": {
+    "start": "parcel src/index.html --open --port 3000",
+    "build": "parcel build src/index.html --public-url ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mdl95r/Simply-sharing-btns.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mdl95r/Simply-sharing-btns/issues"
+  },
+  "homepage": "https://github.com/mdl95r/Simply-sharing-btns#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5",
+    "sass": "^1.54.0"
+  },
+  "dependencies": {}
+}
