@@ -13,3 +13,18 @@
 ```
 
 Features: parcel, es6 classes
+
+Добавил один метод для вызова из вне - getData() для получения списка банков: 
+
+```
+const widget = new calcWidget('#calc_widget', options);
+
+const getDataFromWidget = async () => {
+  const data = await widget.getData();
+
+  const newData = transformData(data)
+
+  console.log(...newData);
+}
+
+```
