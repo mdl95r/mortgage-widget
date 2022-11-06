@@ -1,28 +1,26 @@
-import createElement from "../helpers/createElement";
+import createElement from '../helpers/createElement';
 
 export default function showMarkup(data, { wrapperStyles, minTerm }) {
+  const wrapper = createElement('div', 'wrapper');
 
-	const wrapper = createElement('div', 'wrapper');
-	
-	wrapper.style.cssText = wrapperStyles;
+  wrapper.style.cssText = wrapperStyles;
 
-	const divs = ['settings', 'programs', 'results']
+  const divs = ['settings', 'programs', 'results'];
 
-	divs.forEach(div => {
-		const element = createElement('div', div);
-		wrapper.append(element);
-		wrapper.append(element);
-	});
+  divs.forEach((div) => {
+    const element = createElement('div', div);
+    wrapper.append(element);
+    wrapper.append(element);
+  });
 
+  wrapper.querySelector('.results').innerHTML = render({
+    sumCredit: 0,
+    monthlyPayment: 0,
+    recommended: 0,
+    rate: 0,
+  });
 
-	wrapper.querySelector('.results').innerHTML = render({
-		sumCredit: 0,
-		monthlyPayment: 0,
-		recommended: 0,
-		rate: 0,
-	});
-
-	wrapper.querySelector('.settings').innerHTML = `
+  wrapper.querySelector('.settings').innerHTML = `
 		<div class="settings__item">
 			<label for="price">Стоимость жилья</label>
 			<input type="range" name="price" id="price" min="0" max="100000000" step="100000" value="0">
@@ -37,32 +35,36 @@ export default function showMarkup(data, { wrapperStyles, minTerm }) {
 			<label for="term">Срок кредита</label>
 			<input type="number" name="term" id="term" min="${minTerm}" max="30" value="${minTerm}" inputmode="numeric">
 		</div>
-	`
+	`;
 
-	const listPrograms = createElement('div', 'programs__list');
+  const listPrograms = createElement('div', 'programs__list');
 
-	listPrograms.innerHTML = buildPrograms(data);
+  listPrograms.innerHTML = buildPrograms(data);
 
-	const programsHeader = createElement('div', 'programs__header');
+  const programsHeader = createElement('div', 'programs__header');
 
-	programsHeader.innerHTML = `
+  programsHeader.innerHTML = `
 		<div class="programs__title">Выберите банк</div>
 		<div class="programs__sort">
 			<button class="programs__button-sort programs__sortby-rate">Сортировать по низкой ставке</button>
 			<button class="programs__button-sort programs__sortby-popularity">Сортировать по популятности</button>
 		</div>
-	`
+	`;
 
-	wrapper.querySelector('.programs').append(programsHeader)
-	wrapper.querySelector('.programs').append(listPrograms)
+  wrapper.querySelector('.programs').append(programsHeader);
+  wrapper.querySelector('.programs').append(listPrograms);
 
-	return wrapper
+  return wrapper;
 }
 
-
-const render = ({rate, sumCredit, monthlyPayment, recommended, bank = 'Выберите банк'}) => {
-	
-	return `
+const render = ({
+  rate,
+  sumCredit,
+  monthlyPayment,
+  recommended,
+  bank = 'Выберите банк',
+}) => {
+  return `
 		<div class="results__item">
 			<div class="results__item-title">Ставка:</div>
 			<div class="results__item-value">${rate} %</div>
@@ -83,25 +85,24 @@ const render = ({rate, sumCredit, monthlyPayment, recommended, bank = 'Выбе�
 			<div class="results__item-title">Рекомендуемый доход:</div>
 			<div class="results__item-value">${recommended.toLocaleString()} ₽</div>
 		</div>
-	`
-}
+	`;
+};
 
 const buildPrograms = (data) => {
-	let htmlString = '';
+  let htmlString = '';
 
-	data.forEach(el => {
-		htmlString += 
-			`
+  data.forEach((el) => {
+    htmlString += `
 			<div class="programs__item" data-rate="${el.rate}" data-bank="${el.bank}">
 				<img src="${el.image}" alt="${el.bank}" class="programs__img" loading="lazy">
 				<div class="programs__info">
 					<div class="programs__bank">${el.bank}</div>
 					<div class="programs__rate">Ставка от ${el.rate} %</div>
 				</div>
-			</div>`
-	})
+			</div>`;
+  });
 
-	return htmlString
-}
+  return htmlString;
+};
 
-export { render, buildPrograms }
+export { render, buildPrograms };
