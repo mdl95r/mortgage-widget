@@ -47,7 +47,7 @@ export default function showMarkup(data, { wrapperStyles, minTerm }) {
 		<div class="programs__title">Выберите банк</div>
 		<div class="programs__sort">
 			<button class="programs__button-sort programs__sortby-rate">Сортировать по низкой ставке</button>
-			<button class="programs__button-sort programs__sortby-popularity">Сортировать по популятности</button>
+			<button class="programs__button-sort programs__sortby-popularity">Сортировать по популярности</button>
 		</div>
 	`;
 
