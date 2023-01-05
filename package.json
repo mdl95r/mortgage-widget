@@ -6,7 +6,6 @@
   "main": "dist/main.js",
   "scripts": {
     "start": "parcel src/index.html --open --port 3000",
-    "start:server": "json-server --watch ./db/db.json --port 3001",
     "build": "parcel build src/index.html --public-url ."
   },
   "repository": {
