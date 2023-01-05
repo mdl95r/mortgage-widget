@@ -1,3 +1,4 @@
+import { IGetData } from './widget/interfaces/index';
 import calcWidget from './widget/app/index';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,6 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const widget = new calcWidget('#calc_widget', options);
 
+  // new calcWidget('#calc_widget', {
+  //   ...options,
+  //   urlApi: '//localhost:3001/programs',
+  // });
+
   const getDataFromWidget = async () => {
     const data = await widget.getData();
 
@@ -19,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(...newData);
   };
 
-  const transformData = (data) => {
+  const transformData = (data: Array<IGetData>) => {
     return data.map((el) => {
       return {
         ...el,

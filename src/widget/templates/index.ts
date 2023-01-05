@@ -1,41 +1,53 @@
-import createElement from '../helpers/createElement';
+import { createElement } from '../helpers/createElement';
+import { IGetData, IMarkupOptions, IPaymentObj } from '../interfaces';
 
-export default function showMarkup(data, { wrapperStyles, minTerm }) {
+export default function showMarkup(
+  data: Array<IGetData>,
+  { wrapperStyles, minTerm }: IMarkupOptions
+): HTMLElement {
   const wrapper = createElement('div', 'wrapper');
 
   wrapper.style.cssText = wrapperStyles;
 
   const divs = ['settings', 'programs', 'results'];
 
-  divs.forEach((div) => {
+  divs.forEach((div): void => {
     const element = createElement('div', div);
     wrapper.append(element);
     wrapper.append(element);
   });
 
-  wrapper.querySelector('.results').innerHTML = render({
-    sumCredit: 0,
-    monthlyPayment: 0,
-    recommended: 0,
-    rate: 0,
-  });
+  const results = wrapper.querySelector('.results');
 
-  wrapper.querySelector('.settings').innerHTML = `
-		<div class="settings__item">
-			<label for="price">Стоимость жилья</label>
-			<input type="range" name="price" id="price" min="0" max="100000000" step="100000" value="0">
-			<div id="price-value">0</div>
-		</div>
-		<div class="settings__item">
-			<label for="contribution">Первоначальный взнос</label>
-			<input type="range" name="contribution" id="contribution" min="0" max="100000000" step="100000" value="0">
-			<div id="contribution-value">0</div>
-		</div>
-		<div class="settings__item">
-			<label for="term">Срок кредита</label>
-			<input type="number" name="term" id="term" min="${minTerm}" max="30" value="${minTerm}" inputmode="numeric">
-		</div>
-	`;
+  if (results) {
+    results.innerHTML = render({
+      sumCredit: 0,
+      monthlyPayment: 0,
+      recommended: 0,
+      rate: 0,
+    });
+  }
+
+  const settings = wrapper.querySelector('.settings');
+
+  if (settings) {
+    settings.innerHTML = `
+			<div class="settings__item">
+				<label for="price">Стоимость жилья</label>
+				<input type="range" name="price" id="price" min="0" max="100000000" step="100000" value="0">
+				<div id="price-value">0</div>
+			</div>
+			<div class="settings__item">
+				<label for="contribution">Первоначальный взнос</label>
+				<input type="range" name="contribution" id="contribution" min="0" max="100000000" step="100000" value="0">
+				<div id="contribution-value">0</div>
+			</div>
+			<div class="settings__item">
+				<label for="term">Срок кредита</label>
+				<input type="number" name="term" id="term" min="${minTerm}" max="30" value="${minTerm}" inputmode="numeric">
+			</div>
+		`;
+  }
 
   const listPrograms = createElement('div', 'programs__list');
 
@@ -51,8 +63,8 @@ export default function showMarkup(data, { wrapperStyles, minTerm }) {
 		</div>
 	`;
 
-  wrapper.querySelector('.programs').append(programsHeader);
-  wrapper.querySelector('.programs').append(listPrograms);
+  wrapper.querySelector('.programs')?.append(programsHeader);
+  wrapper.querySelector('.programs')?.append(listPrograms);
 
   return wrapper;
 }
@@ -63,7 +75,7 @@ const render = ({
   monthlyPayment,
   recommended,
   bank = 'Выберите банк',
-}) => {
+}: IPaymentObj<number>): string => {
   return `
 		<div class="results__item">
 			<div class="results__item-title">Ставка:</div>
@@ -88,7 +100,7 @@ const render = ({
 	`;
 };
 
-const buildPrograms = (data) => {
+const buildPrograms = (data: Array<IGetData>): string => {
   let htmlString = '';
 
   data.forEach((el) => {
