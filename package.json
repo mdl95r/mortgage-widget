@@ -1,11 +1,12 @@
 {
-  "name": "ssb",
+  "name": "mortgage-widget",
   "version": "1.0.0",
-  "description": "Simply-sharing-btns",
-  "source": "src/app/index.js",
+  "description": "mortgage widget",
+  "source": "src/app/index.ts",
   "main": "dist/main.js",
   "scripts": {
     "start": "parcel src/index.html --open --port 3000",
+    "start:server": "json-server --watch ./db/db.json --port 3001",
     "build": "parcel build src/index.html --public-url ."
   },
   "repository": {
@@ -21,7 +22,10 @@
   "homepage": "https://github.com/mdl95r/Simply-sharing-btns#readme",
   "devDependencies": {
     "parcel-bundler": "^1.12.5",
-    "sass": "^1.54.0"
+    "sass": "^1.54.0",
+    "typescript": "^4.9.4"
   },
-  "dependencies": {}
+  "dependencies": {
+    "axios": "^1.2.2"
+  }
 }

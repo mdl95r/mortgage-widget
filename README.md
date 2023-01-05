@@ -1,6 +1,7 @@
 # mortgage-widget
 
 ## Перед вами виджет калькулятор ипотеки созданный в учебных целях.
+
 Формат json обьекта:
 
 ```
@@ -12,9 +13,9 @@
 }
 ```
 
-Features: parcel, es6 classes
+Features: parcel, typescript, axios, es6 classes, sort by rating / sort by popularity.
 
-Добавил один метод для вызова из вне - getData() для получения списка банков: 
+Добавил один метод для вызова из вне - getData() для получения списка банков:
 
 ```
 const widget = new calcWidget('#calc_widget', options);
@@ -35,5 +36,7 @@ const transformData = (data) => {
     }
   })
 }
+
+getDataFromWidget();
 
 ```
